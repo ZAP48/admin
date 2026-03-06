@@ -43,7 +43,7 @@
     .item-card img { width: 100%; aspect-ratio: 1/1; object-fit: cover; border: var(--border); border-radius: 12px; background: #fff; display: block; }
     .item-name { font-weight: 900; font-size: 0.8rem; line-height: 1.2; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
 
-    /* HERO BANNER (FOTO/VIDEO) */
+    /* HERO BANNER */
     .hero { position: relative; height: 320px; border-radius: var(--radius); border: var(--border); box-shadow: var(--shadow); margin-bottom: 30px; overflow: hidden; background: #000; color: #fff; cursor: pointer; transition: transform 0.2s;}
     .hero:active { transform: scale(0.98); }
     .hero-media { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.6; z-index: 1; pointer-events: none; }
@@ -96,8 +96,23 @@
     .member-card-static.is-center img { border-color: var(--primary); box-shadow: 0 0 0 3px #000; transform: scale(1.05); }
     .member-info h3 { font-size: 0.65rem; font-weight: 900; margin-top: 4px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
+    /* SELEÇÃO VISUAL DE MEMBROS (NOVO PARA SHUFFLE/DELETE) */
+    .member-card-static.is-selected img { border-color: var(--primary); box-shadow: 0 0 0 3px var(--primary); opacity: 0.8; }
+    .member-card-static.is-selected::after {
+        content: '\f00c'; font-family: 'Font Awesome 6 Free'; font-weight: 900; position: absolute; top: -5px; right: -5px;
+        background: var(--primary); color: #000; border-radius: 50%; width: 22px; height: 22px; font-size: 12px;
+        display: flex; align-items: center; justify-content: center; border: 2px solid #000; z-index: 10;
+    }
+    #md-list.member-grid .member-card-static.is-selected::after {
+        content: '\f014'; background: #ff4757; color: #fff; border-color: #000;
+    }
+    #md-list.member-grid .member-card-static.is-selected img { border-color: #ff4757; box-shadow: 0 0 0 3px #ff4757; }
+
+    .filter-row { display: flex; gap: 8px; margin-bottom: 10px; }
+
     /* STAGES */
-    .stage-card { background: #fff; border: var(--border); border-radius: var(--radius); padding: 15px; margin-bottom: 15px; display: flex; gap: 15px; align-items: center; box-shadow: var(--shadow); }
+    .stage-card { background: #fff; border: var(--border); border-radius: var(--radius); padding: 15px; margin-bottom: 15px; display: flex; gap: 15px; align-items: center; box-shadow: var(--shadow); cursor: pointer; transition: transform 0.1s;}
+    .stage-card:active { transform: scale(0.95); }
     .stage-cover { width: 80px; height: 80px; border-radius: 50%; border: 2px solid #000; object-fit: cover; }
     .stage-info { flex: 1; }
     .stage-title { font-weight: 900; font-size: 1rem; text-transform: uppercase; line-height: 1.1; }
@@ -114,17 +129,17 @@
     @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
     .btn-edit-inline { position:absolute; top:15px; left:15px; background:var(--admin-color); color:#fff; border:2px solid #000; width:40px; height:40px; border-radius:50%; z-index:50; cursor:pointer; display:flex; align-items:center; justify-content:center; box-shadow: 2px 2px 0 #000; font-size: 1.1rem; }
-    .btn-edit-news { position:absolute; top:10px; right:10px; background:var(--admin-color); color:#fff; border:1px solid #000; border-radius:4px; padding:4px 8px; font-size:0.7rem; font-weight:bold; cursor:pointer; }
+    .btn-edit-news { position:absolute; top:10px; right:10px; background:var(--admin-color); color:#fff; border:1px solid #000; border-radius:4px; padding:4px 8px; font-size:0.7rem; font-weight:bold; cursor:pointer; z-index:10; }
     .btn-admin-nav { background: var(--admin-color); color: #fff; border: 2px solid #000; border-radius: 8px; padding: 6px 12px; font-weight: 900; font-size: 0.7rem; cursor: pointer; box-shadow: 2px 2px 0 #000; display: flex; gap: 5px; align-items: center; }
     
-    #admin-editor-overlay .modal-content, #shuffle-modal .modal-content { background: #fff; border: 4px solid var(--admin-color); padding-bottom: 80px; }
+    #admin-editor-overlay .modal-content, #shuffle-modal .modal-content, #manage-teams-modal .modal-content { background: #fff; border: 4px solid var(--admin-color); padding-bottom: 80px; }
     .admin-form-group { margin-bottom: 12px; }
     .admin-form-group label { display: block; font-size: 0.7rem; font-weight: 900; color: var(--admin-color); text-transform: uppercase; margin-bottom: 4px; }
     .admin-form-group input, .admin-form-group textarea, .admin-form-group select { border-color: var(--admin-color); border-width: 2px; }
     .admin-save-btn { background: var(--admin-color); color: #fff; width: 100%; padding: 15px; border: 2px solid #000; font-weight: 900; font-size: 1rem; cursor: pointer; border-radius: 8px; margin-top: 10px; box-shadow: 4px 4px 0 #000; display:flex; justify-content:center; align-items:center; gap:8px;}
     .admin-delete-btn { background: #ff4757; color: #fff; width: 100%; padding: 12px; border: 2px solid #000; font-weight: 900; cursor: pointer; border-radius: 8px; margin-top: 10px; }
 
-    /* MULTI-DELETE & SHUFFLE LISTS */
+    /* MULTI-DELETE LISTS */
     .md-item { display: flex; align-items: center; gap: 10px; padding: 10px; border-bottom: 1px solid #eee; }
     .md-item input[type="checkbox"] { width: 20px; height: 20px; border: 2px solid #000; margin: 0; }
     .md-item span { font-size: 0.85rem; font-weight: 700; flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -134,6 +149,10 @@
     .part-admin-item { background: #fff; border: 1px solid #ddd; padding: 8px; border-radius: 6px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; }
     .part-admin-item .info { font-size: 0.75rem; font-weight: 700; display:flex; flex-direction:column; gap:2px; }
     .part-admin-item .badge { font-size: 0.55rem; background: var(--admin-color); color: #fff; padding: 2px 4px; border-radius: 4px; font-weight: 900; text-transform: uppercase; }
+    
+    #admin-track-modal { z-index: 10000; }
+    .btn-remove-tb { position: absolute; top: -5px; right: -5px; background: #ff4757; color: #fff; border: 2px solid #000; border-radius: 50%; width: 22px; height: 22px; font-size: 10px; font-weight: 900; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 10;}
+    .track-admin-item { background: #fff; border: 2px dashed #ccc; padding: 10px; border-radius: 8px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; }
     
     /* HISTORICO DE TIMES UI */
     .team-history-timeline { border-left: 2px solid #ddd; padding-left: 15px; margin-top: 10px; }
@@ -180,8 +199,9 @@
   <div id="view-members" class="view-section container">
     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
         <h3 class="section-title" style="margin:0;">Membros</h3>
-        <div>
-            <button onclick="openShuffleModal()" style="background:#000; color:var(--primary); border:1px solid var(--primary); padding:5px 10px; font-weight:bold; border-radius:4px; cursor:pointer; margin-right:5px;">🔀 SHUFFLE / PROMOVER</button>
+        <div style="display:flex; gap:5px;">
+            <button onclick="openManageTeams()" style="background:#fff; color:var(--admin-color); border:1px solid var(--admin-color); padding:5px; font-weight:bold; border-radius:4px; cursor:pointer;" title="Configurar Times e Gerações"><i class="fas fa-cog"></i></button>
+            <button onclick="openShuffleModal()" style="background:#000; color:var(--primary); border:1px solid var(--primary); padding:5px 10px; font-weight:bold; border-radius:4px; cursor:pointer;">🔀 SHUFFLE</button>
             <button onclick="openAdminEditor('Membros', null)" style="background:var(--admin-color); color:#fff; border:1px solid #000; padding:5px 10px; font-weight:bold; border-radius:4px; cursor:pointer;">+ Novo</button>
         </div>
     </div>
@@ -237,6 +257,19 @@
     </div>
   </div>
 
+  <div id="stage-modal" class="modal-overlay" onclick="if(event.target==this)closeModal('stage-modal')">
+    <div class="modal-content">
+      <button class="btn-edit-inline" id="btn-edit-stage" title="Editar Stage"><i class="fas fa-pencil-alt"></i></button>
+      <button class="close-btn" onclick="closeModal('stage-modal')">×</button>
+      <div style="padding: 30px 20px 10px; text-align: center;">
+        <img id="sm-cover" src="" style="width:140px; height:140px; border-radius:12px; border:var(--border); object-fit:cover; box-shadow: var(--shadow-sm);">
+        <h2 id="sm-title" class="font-head" style="margin-top:15px; font-size:1.2rem;"></h2>
+        <p id="sm-sub" style="color:var(--primary); font-weight:900; text-transform:uppercase; font-size:0.7rem; -webkit-text-stroke: 0.5px black;"></p>
+      </div>
+      <div id="sm-content" style="padding: 0;"></div>
+    </div>
+  </div>
+
   <div id="admin-editor-overlay" class="modal-overlay" onclick="if(event.target==this)closeModal('admin-editor-overlay')">
       <div class="modal-content">
           <button class="close-btn" onclick="closeModal('admin-editor-overlay')">×</button>
@@ -244,23 +277,19 @@
               <h2 id="admin-title" style="color:var(--admin-color); margin-bottom:15px;">Editor</h2>
               <input type="hidden" id="admin-id">
               <input type="hidden" id="admin-table">
-              
               <div id="admin-form-fields"></div>
               
               <div id="admin-member-parts-section" style="display:none; margin-top:20px; padding-top:20px; border-top:2px dashed var(--admin-color);">
-                  <h3 style="color:var(--admin-color); font-size:1rem; margin-bottom:10px;">Histórico de Times (Edição Manual)</h3>
-                  <div id="admin-team-history-list" class="admin-parts-list"></div>
+                  <h3 style="color:var(--admin-color); font-size:1rem; margin-bottom:10px;">Histórico de Times</h3>
+                  <div id="admin-team-history-list" style="background: #fafafa; border: 2px dashed #ccc; padding: 10px; border-radius: 8px; max-height: 150px; overflow-y: auto; margin-bottom: 10px;"></div>
                   <div style="display:flex; gap:5px; margin-bottom:15px;">
                       <input id="th-date" type="month" class="admin-input" style="flex:1;">
-                      <select id="th-team" class="admin-input" style="flex:2;">
-                          <option value="Team Z">Team Z</option><option value="Team AII">Team AII</option><option value="Team P">Team P</option>
-                          <option value="Team Kenkyuusei">Team Kenkyuusei</option><option value="Team SEEDs">Team SEEDs</option>
-                      </select>
+                      <select id="th-team" class="admin-input" style="flex:2;"></select>
                       <button class="btn-main" style="background:#333; color:#fff; padding:10px; width:auto; margin:0;" onclick="addTeamHistoryManual()">+</button>
                   </div>
 
                   <h3 style="color:var(--admin-color); font-size:1rem; margin-bottom:10px;">Participações (Músicas)</h3>
-                  <div id="admin-member-parts-list" class="admin-parts-list"></div>
+                  <div id="admin-member-parts-list" style="background: #fafafa; border: 2px dashed #ccc; padding: 10px; border-radius: 8px; max-height: 150px; overflow-y: auto; margin-bottom: 10px;"></div>
                   <div style="background:#f9f9f9; padding:10px; border:2px solid #ddd; border-radius:8px; margin-top:10px;">
                       <input id="mp-single" class="admin-input" placeholder="Single/Álbum" style="margin-bottom:5px;">
                       <input id="mp-track" class="admin-input" placeholder="Nome da Música" style="margin-bottom:5px;">
@@ -286,29 +315,38 @@
       </div>
   </div>
 
+  <div id="manage-teams-modal" class="modal-overlay" onclick="if(event.target==this)closeModal('manage-teams-modal')">
+      <div class="modal-content">
+          <button class="close-btn" onclick="closeModal('manage-teams-modal')">×</button>
+          <div style="padding:25px 20px;">
+              <h2 style="color:var(--admin-color); margin-bottom:5px;"><i class="fas fa-users-cog"></i> Configurar</h2>
+              <p style="font-size:0.75rem; color:#666; margin-bottom:15px; font-weight:700;">Corrija nomes errados ou exclua categorias.</p>
+              
+              <h3 style="font-size:1rem; border-bottom:2px solid #eee; padding-bottom:5px;">Times Ativos</h3>
+              <div id="mt-teams-list" style="margin-bottom:20px;"></div>
+
+              <h3 style="font-size:1rem; border-bottom:2px solid #eee; padding-bottom:5px;">Gerações Ativas</h3>
+              <div id="mt-gens-list"></div>
+          </div>
+      </div>
+  </div>
+
   <div id="shuffle-modal" class="modal-overlay" onclick="if(event.target==this)closeModal('shuffle-modal')">
       <div class="modal-content">
           <button class="close-btn" onclick="closeModal('shuffle-modal')">×</button>
           <div style="padding:25px 20px;">
-              <h2 style="color:var(--admin-color); margin-bottom:5px;"><i class="fas fa-random"></i> Shuffle / Promover</h2>
-              <p style="font-size:0.8rem; color:#666; margin-bottom:15px; font-weight:700;">Selecione os membros, a data e o novo time. O histórico será salvo automaticamente.</p>
+              <h2 style="color:var(--admin-color); margin-bottom:5px;"><i class="fas fa-random"></i> Shuffle</h2>
+              <div class="admin-form-group"><label>Data</label><input type="month" id="sh-date" class="admin-input"></div>
+              <div class="admin-form-group"><label>Destino</label><select id="sh-team" class="admin-input" onchange="handleNewOption(this)"></select></div>
               
-              <div class="admin-form-group">
-                  <label>Data da Transferência</label>
-                  <input type="month" id="sh-date" class="admin-input">
+              <h4 style="color:#333; font-size:0.8rem; margin-top:20px; margin-bottom:10px;">SELECIONE OS MEMBROS</h4>
+              <div class="filter-row">
+                  <select id="sh-filter-team" class="admin-input" onchange="renderShuffleList()" style="margin:0;"></select>
               </div>
-              <div class="admin-form-group">
-                  <label>Novo Time (Destino)</label>
-                  <select id="sh-team" class="admin-input" onchange="handleNewOption(this, 'Time')">
-                      </select>
-              </div>
-
-              <label style="font-size:0.7rem; font-weight:900; color:var(--admin-color); text-transform:uppercase; margin-top:15px; display:block;">Selecione os Membros:</label>
               <input type="text" id="sh-search" class="admin-input" placeholder="Buscar membro..." oninput="renderShuffleList()" style="margin-bottom:10px;">
               
-              <div id="sh-list" style="border: 2px solid #ddd; border-radius:8px; max-height: 250px; overflow-y:auto; background:#fafafa;">
-                  </div>
-
+              <div id="sh-list" class="member-grid" style="max-height: 250px; overflow-y:auto; padding:10px 5px; border:2px dashed #ddd; border-radius:8px;"></div>
+              
               <button class="admin-save-btn" onclick="executeShuffle()"><i class="fas fa-check"></i> EXECUTAR SHUFFLE</button>
           </div>
       </div>
@@ -322,13 +360,19 @@
               <select id="md-table" class="admin-input" onchange="loadMultiDeleteList()" style="margin-bottom:15px; border-color:#000;">
                   <option value="Noticias">Notícias</option><option value="Discografia">Discos</option><option value="Membros">Membros</option><option value="Stages">Stages</option><option value="Banners">Banners (Hero)</option>
               </select>
+
+              <div id="md-filters" style="display:none; flex-direction:column; gap:8px; margin-bottom:10px;">
+                  <select id="md-filter-team" class="admin-input" onchange="loadMultiDeleteList()" style="margin:0;"></select>
+                  <input type="text" id="md-search" class="admin-input" placeholder="Buscar membro..." oninput="loadMultiDeleteList()" style="margin:0;">
+              </div>
+
               <div id="md-list" style="border: 2px solid #ddd; border-radius:8px; max-height: 350px; overflow-y:auto; background:#fafafa;"></div>
               <button class="admin-delete-btn" onclick="executeMultiDelete()"><i class="fas fa-exclamation-triangle"></i> EXCLUIR SELECIONADOS</button>
           </div>
       </div>
   </div>
 
-  <div id="admin-track-modal" class="modal-overlay">
+  <div id="admin-track-modal" class="modal-overlay" style="z-index: 10000;">
       <div class="modal-content">
           <button class="close-btn" onclick="closeModal('admin-track-modal')">×</button>
           <div style="padding:25px 20px;">
@@ -357,6 +401,10 @@
   </div>
 
   <script>
+    /* COMPATIBILIDADE GARANTIDA DA FUNÇÃO DE IMAGENS */
+    function resolveImage(f) { if(!f) return "https://placehold.co/300?text=?"; return (typeof f === "string" ? f : f.publicUrl).replace(/[\[\]"]/g, ""); }
+    function switchTabModal(t, el) { const p = el.parentElement; p.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active")); el.classList.add("active"); const content = p.nextElementSibling.parentElement; content.querySelectorAll(".tab-pane").forEach(tp => tp.classList.remove("active")); content.querySelector("#tab-"+t).classList.add("active"); }
+
     const SUPABASE_URL = "https://iooyygtaosshxygnhlco.supabase.co";
     const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imlvb3l5Z3Rhb3NzaHh5Z25obGNvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjkwMDEyNTUsImV4cCI6MjA4NDU3NzI1NX0.gfcVtNgn3g1gnFVrtaIqzkWxajYiV_KbtycYsE9OZ0Y";
     const _sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
@@ -367,6 +415,7 @@
     // ESTADOS DO ADMIN
     let adminTracksBuffer = [], tbSelectedMembers = [], tbCenterId = null, editTrackIndex = -1;
     let memberPartsBuffer = [], memberTeamsHistoryBuffer = [];
+    let shuffleSelectedIds = new Set(), deleteSelectedIds = new Set();
 
     function showLoading(show) { document.getElementById("loading-overlay").style.display = show ? "flex" : "none"; }
     function closeModal(id) { document.getElementById(id).classList.remove("active"); }
@@ -384,18 +433,19 @@
         loadedDiscos = (discos || []).sort((a,b) => (b.id || 0) - (a.id || 0));
         loadedNews = news || [];
         
+        await loadStages(); 
         renderDynamicHero(); renderNews(loadedNews); renderDisco(loadedDiscos); renderMembers();
       } catch (e) { console.error(e); alert("Erro ao carregar dados!"); }
       showLoading(false);
     }
 
-    function switchView(id, el) {
-      document.querySelectorAll(".view-section").forEach(v => v.classList.remove("active"));
-      document.querySelectorAll(".nav-item").forEach(n => n.classList.remove("active"));
-      document.getElementById(id).classList.add("active"); el.classList.add("active"); window.scrollTo(0,0);
+    async function loadStages() {
+        try { const { data, error } = await _sb.from("Stages").select('*').order('id', {ascending: false}); if(error) throw error; loadedStages = data || []; renderStagesList(); } catch(e) {}
     }
 
-    /* --- RENDERIZAÇÃO DO HERO (BANNER DINÂMICO) --- */
+    function switchView(id, el) { document.querySelectorAll(".view-section").forEach(v => v.classList.remove("active")); document.querySelectorAll(".nav-item").forEach(n => n.classList.remove("active")); document.getElementById(id).classList.add("active"); el.classList.add("active"); window.scrollTo(0,0); }
+
+    /* --- RENDERIZAÇÃO DO HERO E VIEWS --- */
     function renderDynamicHero() {
         const wrapper = document.getElementById("hero-media-wrapper"), container = document.getElementById("hero-container");
         let b = loadedBanner; if(!b && loadedDiscos.length > 0) b = { tipo: 'imagem', url_midia: loadedDiscos[0].Capa, titulo: loadedDiscos[0].Titulo, subtitulo: 'ÚLTIMO LANÇAMENTO', link_destino: '' };
@@ -426,12 +476,29 @@
     function renderTracklistFromJSON(list) { if(!list || !list.length) return "<p>Vazio.</p>"; return `<ul class="tracklist">${list.map(item => { let cls='is-bside'; const k = (item.kind||"").toLowerCase(); if(k.includes('a-side')||k.includes('aside')) cls='is-aside'; else if(k.includes('unit')) cls='is-unit'; return `<li><span>${item.name}</span><span class="label-brat ${cls}">${item.kind}</span></li>`; }).join('')}</ul>`; }
     function renderFormationFromJSON(list) { if(!list || !list.length) return "<p>Vazio.</p>"; return list.map(g => `<div class="formation-group"><div class="formation-header"><div class="formation-title"><span class="formation-idol-icon"><i class="fas fa-music"></i></span>${g.name}</div><i class="fas fa-chevron-down formation-arrow"></i></div><div class="formation-content"><div class="member-grid">${(g.members||[]).map(m => { const real = loadedMembers.find(x => x.Nome === m.name); const url = real ? resolveImage(real.Foto) : `https://placehold.co/80x80/eee/333?text=${m.name.charAt(0)}`; return `<div class="member-card-static ${m.isCenter?'is-center':''}"><img src="${url}"><div class="member-info"><h3>${m.name}</h3></div></div>`; }).join('')}</div></div></div>`).join(''); }
 
-    /* DROPDOWNS DINÂMICOS (TIMES E GERAÇÕES) */
+    function renderStagesList() { const div = document.getElementById('stages-list'); if(!loadedStages.length) { div.innerHTML = '<div style="text-align:center; padding:20px; color:#999;">Nenhum stage cadastrado.</div>'; return; } div.innerHTML = loadedStages.map(s => `<div class="stage-card" onclick="openStageModal(${s.id})"><img src="${resolveImage(s.Capa)}" class="stage-cover" onerror="this.src='https://placehold.co/80'"><div class="stage-info"><div class="stage-title">${s.Titulo}</div><div class="stage-sub">${s.Subtitulo || ''}</div><span class="stage-badge">${s.Status || 'Em Cartaz'}</span></div></div>`).join(''); }
+
+    async function openStageModal(stageId) {
+        const stage = loadedStages.find(s => s.id == stageId); if(!stage) return;
+        document.getElementById("sm-title").innerText = stage.Titulo; document.getElementById("sm-sub").innerText = stage.Subtitulo || ''; document.getElementById("sm-cover").src = resolveImage(stage.Capa);
+        document.getElementById("btn-edit-stage").onclick = () => { closeModal('stage-modal'); openAdminEditor('Stages', stage.id, stage); };
+        const content = document.getElementById("sm-content"); content.innerHTML = `<div class="tabs"><button class="tab-btn active" data-target="s-setlist">Setlist</button><button class="tab-btn" data-target="s-cast">Elenco</button></div><div id="pane-s-setlist" class="modal-section active" style="padding:20px;">${renderSetlist(stage.Setlist)}</div><div id="pane-s-cast" class="modal-section" style="padding:20px;"><div style="text-align:center; color:#999;">Carregando elenco...</div></div>`;
+        document.getElementById("stage-modal").classList.add("active");
+        try { const { data: casts, error } = await _sb.from("Stagecasts").select('*').eq('stage_id', stageId); if(!error) renderStageCasts(casts || []); } catch(e) {} initTabsAndAccordion(content); 
+    }
+
+    function renderSetlist(text) { if(!text) return '<p style="color:#999; text-align:center;">Setlist indisponível.</p>'; return '<div class="setlist-wrap">' + text.split('\n').map(line => { const l = line.trim(); if(!l) return ''; if(l.match(/^M\d+/)) return `<div class="sl-row"><span class="sl-music">${l}</span></div>`; if(l.match(/^MC\d+/)) return `<div class="sl-row"><span class="sl-mc">${l}</span></div>`; if(l.toLowerCase().includes('encore')) return `<div class="sl-header">${l}</div>`; return `<div class="sl-row">${l}</div>`; }).join('') + '</div>'; }
+    function renderStageCasts(casts) { const div = document.getElementById('pane-s-cast'); if(!casts.length) { div.innerHTML = '<p style="color:#999; text-align:center;">Nenhum elenco.</p>'; return; } div.innerHTML = casts.map(cast => { let members = cast.Membros; try { if (typeof members === 'string') { members = JSON.parse(members); if (typeof members === 'string') members = JSON.parse(members); } } catch (e) { members = []; } if (!Array.isArray(members)) members = [members]; const grid = members.map(m => { const real = loadedMembers.find(x => x.Nome === m.name); const photo = real ? resolveImage(real.Foto) : `https://placehold.co/80`; return `<div class="member-card-static"><img src="${photo}" style="width:50px; height:50px; border-radius:50%; object-fit:cover; border:2px solid #ccc;"><div class="member-info"><h3 style="font-size:0.6rem;">${m.name}</h3></div></div>`; }).join(''); return `<div class="formation-group open"><div class="formation-header" style="background:#000; color:#fff;"><div class="formation-title" style="font-size:0.8rem;">${cast.Nome}</div></div><div class="formation-content" style="padding:15px; display:block;"><div class="member-grid" style="grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));">${grid}</div></div></div>`; }).join(''); }
+
+    /* =========================================================
+       GESTOR DE TIMES E GERAÇÕES
+       ========================================================= */
     function getTeamsOptions(selected) {
-        const defaultTeams = ["Team Z", "Team AII", "Team P", "Team Kenkyuusei", "Team SEEDs", "Graduada", "Demitida"];
-        const existingTeams = loadedMembers.map(m => m.Time).filter(Boolean);
-        const allTeams = [...new Set([...defaultTeams, ...existingTeams])];
-        let html = allTeams.map(t => `<option value="${t}" ${t === selected ? 'selected' : ''}>${t}</option>`).join('');
+        const order = ["Team Z", "Team AII", "Team P", "Team Kenkyuusei", "Team SEEDs"];
+        const existing = loadedMembers.map(m => m.Time).filter(Boolean);
+        const allTeams = [...new Set([...order, ...existing])];
+        let html = '<option value="">Sem Time...</option>';
+        allTeams.forEach(t => { html += `<option value="${t}" ${t === selected ? 'selected' : ''}>${t}</option>`; });
         html += `<option value="NEW" style="font-weight:900; color:#e91e63;">+ CRIAR NOVO TIME...</option>`;
         return html;
     }
@@ -440,28 +507,51 @@
         const existingGens = loadedMembers.map(m => m.Geracao).filter(Boolean);
         let allGens = [...new Set(existingGens)].sort();
         if(allGens.length === 0) allGens = ["1ª Geração", "2ª Geração", "3ª Geração"];
-        let html = allGens.map(g => `<option value="${g}" ${g === selected ? 'selected' : ''}>${g}</option>`).join('');
+        let html = '<option value="">Sem Geração...</option>';
+        allGens.forEach(g => { html += `<option value="${g}" ${g === selected ? 'selected' : ''}>${g}</option>`; });
         html += `<option value="NEW" style="font-weight:900; color:#e91e63;">+ CRIAR NOVA GERAÇÃO...</option>`;
         return html;
     }
 
-    function handleNewOption(selectElement, typeName) {
-        if(selectElement.value === "NEW") {
-            const newVal = prompt(`Digite o nome do(a) novo(a) ${typeName}:`);
-            if(newVal && newVal.trim() !== "") {
-                const option = document.createElement("option"); option.value = newVal.trim(); option.text = newVal.trim();
-                selectElement.insertBefore(option, selectElement.lastElementChild); selectElement.value = newVal.trim();
-            } else { selectElement.selectedIndex = 0; }
+    function handleNewOption(sel) {
+        if(sel.value === 'NEW') {
+            const val = prompt("Digite o nome da nova categoria:");
+            if(val && val.trim() !== '') {
+                const opt = document.createElement('option'); opt.value = val.trim(); opt.innerText = val.trim();
+                sel.insertBefore(opt, sel.lastElementChild); sel.value = val.trim();
+            } else { sel.selectedIndex = 0; }
         }
     }
 
+    function openManageTeams() { renderManageTeams(); document.getElementById('manage-teams-modal').classList.add('active'); }
+    function renderManageTeams() {
+        const teams = [...new Set(loadedMembers.map(m => m.Time).filter(Boolean))]; const gens = [...new Set(loadedMembers.map(m => m.Geracao).filter(Boolean))];
+        document.getElementById('mt-teams-list').innerHTML = teams.map(t => `<div class="md-item"><span>${t}</span> <button class="btn-main" style="padding:5px; width:auto; margin:0;" onclick="renameAttribute('Time', '${t}')"><i class="fas fa-edit"></i></button> <button class="btn-main" style="padding:5px; width:auto; margin:0; background:#ff4757; border-color:#000;" onclick="deleteAttribute('Time', '${t}')"><i class="fas fa-trash"></i></button></div>`).join('') || '<div style="color:#999; font-size:0.8rem; padding:10px 0;">Nenhum time ativo.</div>';
+        document.getElementById('mt-gens-list').innerHTML = gens.map(g => `<div class="md-item"><span>${g}</span> <button class="btn-main" style="padding:5px; width:auto; margin:0;" onclick="renameAttribute('Geracao', '${g}')"><i class="fas fa-edit"></i></button> <button class="btn-main" style="padding:5px; width:auto; margin:0; background:#ff4757; border-color:#000;" onclick="deleteAttribute('Geracao', '${g}')"><i class="fas fa-trash"></i></button></div>`).join('') || '<div style="color:#999; font-size:0.8rem; padding:10px 0;">Nenhuma geração ativa.</div>';
+    }
+
+    async function renameAttribute(type, oldName) {
+        const newName = prompt(`Renomear "${oldName}" para:`, oldName); if(!newName || newName.trim() === oldName || newName.trim() === "") return;
+        showLoading(true); try { const membersToUpdate = loadedMembers.filter(m => m[type] === oldName); for(let m of membersToUpdate) await _sb.from('Membros').update({ [type]: newName.trim() }).eq('id', m.id); await init(); renderManageTeams(); } catch(e) {} showLoading(false);
+    }
+    async function deleteAttribute(type, name) {
+        if(!confirm(`Excluir "${name}"? Os membros desta categoria ficarão sem registro.`)) return;
+        showLoading(true); try { const membersToUpdate = loadedMembers.filter(m => m[type] === name); for(let m of membersToUpdate) await _sb.from('Membros').update({ [type]: '' }).eq('id', m.id); await init(); renderManageTeams(); } catch(e) {} showLoading(false);
+    }
+
+    /* FILTROS DE MEMBROS E EXIBIÇÃO NA HOME */
     function setMemberFilter(t, btn) { currentFilter = t; document.querySelectorAll(".btn-filter").forEach(b => b.classList.remove("active")); btn.classList.add("active"); renderMembers(); }
     
     function renderMembers() { 
       const container = document.getElementById("members-container"); const scroll = document.getElementById("scroll-buttons"); container.innerHTML = ""; scroll.innerHTML = ""; const groups = {}; 
       loadedMembers.forEach(m => { if(['graduada','demitida'].includes(m.Status?.toLowerCase())) return; const key = currentFilter === 'team' ? (m.Time || "Outros") : (m.Geracao || "Outros"); if(!groups[key]) groups[key] = []; groups[key].push(m); }); 
+      
       const orderMap = {"Team Z": 1, "Team AII": 2, "Team P": 3, "Team Kenkyuusei": 4, "Team SEEDs": 5};
-      const keys = Object.keys(groups).sort((a, b) => { if (currentFilter === 'team') { const wA = orderMap[a] || 99; const wB = orderMap[b] || 99; if (wA !== wB) return wA - wB; } return a.localeCompare(b); });
+      const keys = Object.keys(groups).sort((a, b) => { 
+          if (currentFilter === 'team') { const wA = orderMap[a] || 99; const wB = orderMap[b] || 99; if (wA !== wB) return wA - wB; } 
+          return a.localeCompare(b); 
+      });
+
       keys.forEach((key, idx) => { const id = `g-${idx}`; scroll.innerHTML += `<button class="btn-pill" onclick="document.getElementById('${id}').scrollIntoView({behavior:'smooth', block:'center'})">${key}</button>`; container.innerHTML += `<div id="${id}"><h4 class="section-title" style="margin-top:20px;">${key}</h4><div class="grid-3">${groups[key].map(m => `<div class="item-card" onclick='openMemberModal(${JSON.stringify(m).replace(/'/g, "&apos;")})'><img src="${resolveImage(m.Foto)}"><div class="item-name">${m.Nome}</div></div>`).join('')}</div></div>`; }); 
     }
 
@@ -469,31 +559,15 @@
       document.getElementById("m-name").innerText = m.Nome; document.getElementById("m-team").innerText = `${m.Time} • ${m.Geracao}`; document.getElementById("m-cover").src = resolveImage(m.Foto); document.getElementById("m-bio").innerText = m.Perfil || "Sem bio.";
       document.getElementById("btn-edit-member").onclick = () => { closeModal('member-modal'); openAdminEditor('Membros', m.id, m); };
 
-      // Render History Timeline
       let th = []; try { th = JSON.parse(m.Historico_Times || "[]"); } catch(e){}
       const histEl = document.getElementById("m-history-timeline");
-      if(th.length === 0) histEl.innerHTML = `<div style="color:#999; font-size:0.7rem;">Nenhum registro.</div>`;
+      if(th.length === 0) histEl.innerHTML = `<div style="color:#999; font-size:0.7rem;">Nenhum registro de transferência.</div>`;
       else histEl.innerHTML = th.map(h => `<div class="team-history-item"><span class="team-history-date">${h.data}</span><br>${h.para}</div>`).join('');
 
-      // Render Tracks
       let parts = typeof m.Participacoes === "string" ? JSON.parse(m.Participacoes || "[]") : m.Participacoes; if (!Array.isArray(parts)) parts = []; const discoMap = {}; loadedDiscos.forEach(d => { discoMap[d.Titulo] = d.id || 0; }); parts.sort((a, b) => { const titleA = typeof a === 'string' ? a.split(':')[0] : (a.single || ''); const titleB = typeof b === 'string' ? b.split(':')[0] : (b.single || ''); return (discoMap[titleA] || 99999) - (discoMap[titleB] || 99999); });
-      const partsHTML = parts.map(p => {
-        if (typeof p === 'string') return `<div class="part-card"><div class="part-row" style="font-weight:700;">${p}</div></div>`;
-        const rawTracks = p.tracks || []; const tracks = Array.isArray(rawTracks) ? rawTracks : [rawTracks];
-        const rows = tracks.map(t => {
-          if (!t) return ""; const labels = t.labels || [];
-          const badges = Array.isArray(labels) ? labels.map(l => { const slug = String(l).toLowerCase(); let cls = ''; let icon = 'fa-tag'; if(slug.includes('a-side') || slug==='aside') { cls='is-aside'; icon='fa-star'; } else if(slug.includes('b-side') || slug==='bside') { cls='is-bside'; icon='fa-compact-disc'; } else if(slug.includes('center')) { cls='is-center'; icon='fa-crown'; } else if(slug.includes('unit')) { cls='is-unit'; icon='fa-users'; } return `<span class="label-brat ${cls}"><i class="fas ${icon}"></i> ${l}</span>`; }).join('') : '';
-          return `<div class="part-row"><span>${t.title || 'Música'}</span><div>${badges}</div></div>`;
-        }).join('');
-        return `<div class="part-card"><div class="part-header">${p.single || 'Single'}</div>${rows}</div>`;
-      }).join('');
-
-      document.getElementById("m-part").innerHTML = partsHTML || '<p style="text-align:center; color:#999; padding:20px;">Nenhuma música registrada.</p>';
-      switchTabModal('perfil', document.querySelector('#member-modal .tab-btn')); document.getElementById("member-modal").classList.add("active");
+      const partsHTML = parts.map(p => { if (typeof p === 'string') return `<div class="part-card"><div class="part-row" style="font-weight:700;">${p}</div></div>`; const rawTracks = p.tracks || []; const tracks = Array.isArray(rawTracks) ? rawTracks : [rawTracks]; const rows = tracks.map(t => { if (!t) return ""; const labels = t.labels || []; const badges = Array.isArray(labels) ? labels.map(l => { const slug = String(l).toLowerCase(); let cls = ''; let icon = 'fa-tag'; if(slug.includes('a-side') || slug==='aside') { cls='is-aside'; icon='fa-star'; } else if(slug.includes('b-side') || slug==='bside') { cls='is-bside'; icon='fa-compact-disc'; } else if(slug.includes('center')) { cls='is-center'; icon='fa-crown'; } else if(slug.includes('unit')) { cls='is-unit'; icon='fa-users'; } return `<span class="label-brat ${cls}"><i class="fas ${icon}"></i> ${l}</span>`; }).join('') : ''; return `<div class="part-row"><span>${t.title || 'Música'}</span><div>${badges}</div></div>`; }).join(''); return `<div class="part-card"><div class="part-header">${p.single || 'Single'}</div>${rows}</div>`; }).join('');
+      document.getElementById("m-part").innerHTML = partsHTML || '<p style="text-align:center; color:#999; padding:20px;">Nenhuma música registrada.</p>'; switchTabModal('perfil', document.querySelector('#member-modal .tab-btn')); document.getElementById("member-modal").classList.add("active");
     }
-
-    function resolveImage(f) { if(!f) return "https://placehold.co/300?text=?"; return (typeof f === "string" ? f : f.publicUrl).replace(/[\[\]"]/g, ""); }
-    function switchTabModal(t, el) { const p = el.parentElement; p.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active")); el.classList.add("active"); const content = p.nextElementSibling.parentElement; content.querySelectorAll(".tab-pane").forEach(tp => tp.classList.remove("active")); content.querySelector("#tab-"+t).classList.add("active"); }
 
     /* =========================================================
        SISTEMA DE ADMIN: EDIÇÃO E CRIAÇÃO
@@ -506,14 +580,22 @@
 
         if(table === 'Banners') {
             const d = dataObj || {titulo:'', subtitulo:'', tipo:'imagem', url_midia:'', link_destino:''};
-            box.innerHTML = `<div class="admin-form-group"><label>Título</label><input id="a-titulo" class="admin-input" value="${d.titulo||''}"></div><div class="admin-form-group"><label>Subtítulo</label><input id="a-sub" class="admin-input" value="${d.subtitulo||''}"></div><div class="admin-form-group"><label>Tipo (imagem ou video)</label><select id="a-tipo" class="admin-input"><option value="imagem" ${d.tipo === 'imagem' ? 'selected' : ''}>Imagem (JPG, PNG)</option><option value="video" ${d.tipo === 'video' ? 'selected' : ''}>Vídeo (MP4)</option></select></div><div class="admin-form-group"><label>URL da Mídia</label><input id="a-url" class="admin-input" value="${d.url_midia||''}"></div><div class="admin-form-group"><label>Link de Destino (Opcional)</label><input id="a-link" class="admin-input" placeholder="https://..." value="${d.link_destino||''}"></div>`;
+            box.innerHTML = `<div class="admin-form-group"><label>Título</label><input id="a-titulo" class="admin-input" value="${d.titulo||''}"></div><div class="admin-form-group"><label>Subtítulo</label><input id="a-sub" class="admin-input" value="${d.subtitulo||''}"></div><div class="admin-form-group"><label>Tipo (imagem ou video)</label><select id="a-tipo" class="admin-input"><option value="imagem" ${d.tipo === 'imagem' ? 'selected' : ''}>Imagem (JPG, PNG)</option><option value="video" ${d.tipo === 'video' ? 'selected' : ''}>Vídeo (MP4)</option></select></div><div class="admin-form-group"><label>URL da Mídia</label><input id="a-url" class="admin-input" value="${d.url_midia||''}"></div><div class="admin-form-group"><label>Link de Destino</label><input id="a-link" class="admin-input" placeholder="https://..." value="${d.link_destino||''}"></div>`;
         }
-        else if(table === 'Membros') {
+        else if(table === 'Noticias') {
+            const d = dataObj || {Titulo:'', Data:'', Categoria:'Release', Texto:''};
+            box.innerHTML = `<div class="admin-form-group"><label>Título</label><input id="a-titulo" class="admin-input" value="${d.Titulo}"></div><div class="admin-form-group"><label>Categoria</label><input id="a-cat" class="admin-input" value="${d.Categoria}"></div><div class="admin-form-group"><label>Data</label><input id="a-data" type="date" class="admin-input" value="${d.Data}"></div><div class="admin-form-group"><label>Texto</label><textarea id="a-texto" class="admin-input" rows="4">${d.Texto||''}</textarea></div>`;
+        } else if(table === 'Membros') {
             const d = dataObj || {Nome:'', Time:'', Geracao:'', Status:'Ativa', Foto:'', Perfil:'', Participacoes:'', Historico_Times:''};
-            box.innerHTML = `<div class="admin-form-group"><label>Nome</label><input id="a-nome" class="admin-input" value="${d.Nome}"></div><div class="admin-form-group"><label>Time</label><select id="a-time" class="admin-input" onchange="handleNewOption(this, 'Time')">${getTeamsOptions(d.Time)}</select></div><div class="admin-form-group"><label>Geração</label><select id="a-geracao" class="admin-input" onchange="handleNewOption(this, 'Geração')">${getGensOptions(d.Geracao)}</select></div><div class="admin-form-group"><label>Status</label><select id="a-status" class="admin-input"><option value="Ativa" ${d.Status==='Ativa'?'selected':''}>Ativa</option><option value="Graduada" ${d.Status==='Graduada'?'selected':''}>Graduada</option><option value="Demitida" ${d.Status==='Demitida'?'selected':''}>Demitida</option></select></div><div class="admin-form-group"><label>URL Foto</label><input id="a-foto" class="admin-input" value="${d.Foto||''}"></div><div class="admin-form-group"><label>Bio</label><textarea id="a-perfil" class="admin-input" rows="4">${d.Perfil||''}</textarea></div>`;
+            box.innerHTML = `
+                <div class="admin-form-group"><label>Nome</label><input id="a-nome" class="admin-input" value="${d.Nome}"></div>
+                <div class="admin-form-group"><label>Time</label><select id="a-time" class="admin-input" onchange="handleNewOption(this)">${getTeamsOptions(d.Time)}</select></div>
+                <div class="admin-form-group"><label>Geração</label><select id="a-geracao" class="admin-input" onchange="handleNewOption(this)">${getGensOptions(d.Geracao)}</select></div>
+                <div class="admin-form-group"><label>Status</label><select id="a-status" class="admin-input"><option value="Ativa" ${d.Status==='Ativa'?'selected':''}>Ativa</option><option value="Graduada" ${d.Status==='Graduada'?'selected':''}>Graduada</option><option value="Demitida" ${d.Status==='Demitida'?'selected':''}>Demitida</option></select></div><div class="admin-form-group"><label>URL Foto</label><input id="a-foto" class="admin-input" value="${d.Foto||''}"></div><div class="admin-form-group"><label>Bio</label><textarea id="a-perfil" class="admin-input" rows="4">${d.Perfil||''}</textarea></div>`;
             document.getElementById("admin-member-parts-section").style.display = "block";
             try { memberPartsBuffer = typeof d.Participacoes === 'string' ? JSON.parse(d.Participacoes || "[]") : (d.Participacoes || []); } catch(e) { memberPartsBuffer = []; } if(!Array.isArray(memberPartsBuffer)) memberPartsBuffer = [];
             try { memberTeamsHistoryBuffer = typeof d.Historico_Times === 'string' ? JSON.parse(d.Historico_Times || "[]") : (d.Historico_Times || []); } catch(e) { memberTeamsHistoryBuffer = []; } if(!Array.isArray(memberTeamsHistoryBuffer)) memberTeamsHistoryBuffer = [];
+            document.getElementById('th-team').innerHTML = getTeamsOptions().replace('<option value="NEW" style="font-weight:900; color:#e91e63;">+ CRIAR NOVO TIME...</option>', '');
             renderMemberPartsAdmin(); renderTeamHistoryAdmin();
         } else if(table === 'Discografia') {
             const d = dataObj || {Titulo:'', Tipo:'Single', Data:'', Center:'', Capa:''};
@@ -521,7 +603,10 @@
             document.getElementById("admin-tracks-section").style.display = "block";
             if(d.Tracklist) { const temp = document.createElement("div"); temp.innerHTML = d.Tracklist; const jsonEl = temp.querySelector("#ctl48-formation-data"); if(jsonEl) adminTracksBuffer = JSON.parse(jsonEl.textContent.trim()); }
             renderAdminTracksList();
-        } 
+        } else if(table === 'Stages') {
+            const d = dataObj || {Titulo:'', Subtitulo:'', Estreia:'', Status:'Em Cartaz', Capa:'', Setlist:''};
+            box.innerHTML = `<div class="admin-form-group"><label>Título</label><input id="a-titulo" class="admin-input" value="${d.Titulo}"></div><div class="admin-form-group"><label>Subtítulo</label><input id="a-sub" class="admin-input" value="${d.Subtitulo||''}"></div><div class="admin-form-group"><label>Status</label><input id="a-status" class="admin-input" value="${d.Status||'Em Cartaz'}"></div><div class="admin-form-group"><label>URL da Capa</label><input id="a-capa" class="admin-input" value="${d.Capa||''}"></div><div class="admin-form-group"><label>Setlist</label><textarea id="a-setlist" class="admin-input" rows="6">${d.Setlist||''}</textarea></div>`;
+        }
         document.getElementById('admin-editor-overlay').classList.add('active');
     }
 
@@ -532,6 +617,7 @@
         else if(table === 'Noticias') { payload = { Titulo: val('a-titulo'), Categoria: val('a-cat'), Data: val('a-data'), Texto: val('a-texto') }; }
         else if(table === 'Membros') { payload = { Nome: val('a-nome'), Time: val('a-time'), Geracao: val('a-geracao'), Status: val('a-status'), Foto: val('a-foto'), Perfil: val('a-perfil'), Participacoes: JSON.stringify(memberPartsBuffer), Historico_Times: JSON.stringify(memberTeamsHistoryBuffer) }; }
         else if(table === 'Discografia') { const fC = (adminTracksBuffer[0] && adminTracksBuffer[0].members) ? adminTracksBuffer[0].members.find(m => m.isCenter) : null; payload = { Titulo: val('a-titulo'), Tipo: val('a-tipo'), Data: val('a-data'), Center: fC ? fC.name : '', Capa: val('a-capa'), Tracklist: buildDiscoHTML() }; }
+        else if(table === 'Stages') { payload = { Titulo: val('a-titulo'), Subtitulo: val('a-sub'), Status: val('a-status'), Capa: val('a-capa'), Setlist: val('a-setlist') }; }
         try { if(id) { await _sb.from(table).update(payload).eq('id', id); } else { await _sb.from(table).insert([payload]); } closeModal('admin-editor-overlay'); await init(); } catch(e) { alert("Erro ao salvar: " + e.message); }
         showLoading(false);
     }
@@ -542,21 +628,18 @@
         showLoading(true); try { await _sb.from(table).delete().eq('id', id); closeModal('admin-editor-overlay'); await init(); } catch(e) { alert("Erro ao deletar."); } showLoading(false);
     }
 
-    /* --- HISTORICO DE TIMES ADMIN --- */
     function renderTeamHistoryAdmin() {
         const list = document.getElementById("admin-team-history-list");
-        if(memberTeamsHistoryBuffer.length === 0) { list.innerHTML = "<p style='font-size:0.75rem; color:#999;'>Sem histórico de transferência.</p>"; return; }
-        list.innerHTML = memberTeamsHistoryBuffer.map((h, i) => `<div class="part-admin-item"><div class="info"><span>${h.data}</span><span style="color:var(--admin-color)">${h.para}</span></div><button style="color:red; background:none; border:none; padding:5px; font-weight:bold;" onclick="removeTeamHistory(${i})">X</button></div>`).join('');
+        if(memberTeamsHistoryBuffer.length === 0) { list.innerHTML = "<p style='font-size:0.75rem; color:#999;'>Sem histórico.</p>"; return; }
+        list.innerHTML = memberTeamsHistoryBuffer.map((h, i) => `<div class="part-admin-item" style="border-left:4px solid var(--admin-color)"><div class="info"><span>${h.data}</span><span style="color:var(--black)">${h.para}</span></div><button style="color:red; background:none; border:none; padding:5px; font-weight:bold;" onclick="removeTeamHistory(${i})">X</button></div>`).join('');
     }
     function addTeamHistoryManual() {
         const d = val('th-date'), t = val('th-team');
-        if(!d || !t) return alert("Preencha data e time.");
-        memberTeamsHistoryBuffer.push({ data: d, para: t });
-        renderTeamHistoryAdmin();
+        if(!d || !t || t === "NEW") return alert("Preencha data e time.");
+        memberTeamsHistoryBuffer.push({ data: d, para: t }); renderTeamHistoryAdmin();
     }
     function removeTeamHistory(i) { memberTeamsHistoryBuffer.splice(i, 1); renderTeamHistoryAdmin(); }
 
-    /* --- PARTICIPACOES (MÚSICAS) ADMIN --- */
     function renderMemberPartsAdmin() {
         const list = document.getElementById("admin-member-parts-list");
         if(memberPartsBuffer.length === 0) { list.innerHTML = "<p style='font-size:0.75rem; color:#999;'>Sem histórico.</p>"; return; }
@@ -571,35 +654,49 @@
     function addMemberPart() {
         const s = val('mp-single').trim(), t = val('mp-track').trim(), k = val('mp-kind'), isC = document.getElementById('mp-iscenter').checked;
         if(!s || !t) return alert("Preencha Single e Música!");
-        const l = [k]; if(isC) l.push("Center");
-        let ex = memberPartsBuffer.find(p => typeof p !== 'string' && p.single === s);
+        const l = [k]; if(isC) l.push("Center"); let ex = memberPartsBuffer.find(p => typeof p !== 'string' && p.single === s);
         if(ex) { ex.tracks.push({ title: t, labels: l }); } else { memberPartsBuffer.push({ single: s, tracks: [{ title: t, labels: l }] }); }
         document.getElementById('mp-track').value = ''; document.getElementById('mp-iscenter').checked = false; renderMemberPartsAdmin();
     }
     function removeMemberPart(pI, tI) { if(tI === null) { memberPartsBuffer.splice(pI, 1); } else { memberPartsBuffer[pI].tracks.splice(tI, 1); if(memberPartsBuffer[pI].tracks.length === 0) memberPartsBuffer.splice(pI, 1); } renderMemberPartsAdmin(); }
 
     /* =========================================================
-       SISTEMA DE SHUFFLE E PROMOÇÃO (MÚLTIPLO)
+       SISTEMA DE SHUFFLE (GRID VISUAL)
        ========================================================= */
     function openShuffleModal() {
-        document.getElementById("sh-team").innerHTML = getTeamsOptions(); // Carrega os times dinamicamente
-        document.getElementById("sh-date").value = new Date().toISOString().slice(0, 7); // Default YYYY-MM
+        shuffleSelectedIds.clear();
+        document.getElementById("sh-team").innerHTML = getTeamsOptions(); 
+        document.getElementById("sh-filter-team").innerHTML = '<option value="">Todos os Times</option>' + getTeamsOptions().replace('<option value="NEW" style="font-weight:900; color:#e91e63;">+ CRIAR NOVO TIME...</option>', '');
+        document.getElementById("sh-date").value = new Date().toISOString().slice(0, 7); 
+        document.getElementById('sh-search').value = '';
         document.getElementById('shuffle-modal').classList.add('active');
+        renderShuffleList();
+    }
+
+    function toggleShuffleMember(id) {
+        if(shuffleSelectedIds.has(id)) shuffleSelectedIds.delete(id); else shuffleSelectedIds.add(id);
         renderShuffleList();
     }
 
     function renderShuffleList() {
         const q = document.getElementById("sh-search").value.toLowerCase();
+        const t = document.getElementById("sh-filter-team").value;
         const list = document.getElementById('sh-list');
-        const avail = loadedMembers.filter(m => m.Status === 'Ativa' && m.Nome.toLowerCase().includes(q));
-        list.innerHTML = avail.map(m => `<label class="md-item"><input type="checkbox" value="${m.id}" class="sh-checkbox"><span>${m.Nome} <small style="color:#e91e63">(${m.Time})</small></span></label>`).join('');
+        
+        const avail = loadedMembers.filter(m => m.Status === 'Ativa' && m.Nome.toLowerCase().includes(q) && (t === '' || m.Time === t));
+        if(avail.length === 0) { list.innerHTML = '<div style="grid-column: 1/-1; text-align:center; color:#999; font-size:0.8rem; padding:10px;">Nenhum membro encontrado.</div>'; return; }
+        
+        list.innerHTML = avail.map(m => `
+            <div class="member-card-static ${shuffleSelectedIds.has(m.id) ? 'is-selected' : ''}" onclick="toggleShuffleMember(${m.id})">
+                <img src="${resolveImage(m.Foto)}">
+                <div class="member-info"><h3>${m.Nome}</h3><p style="font-size:0.55rem; color:#666; margin:0;">${m.Time || 'S/ Time'}</p></div>
+            </div>
+        `).join('');
     }
 
     async function executeShuffle() {
-        const targetTeam = val('sh-team');
-        const shuffleDate = val('sh-date');
-        const checkboxes = document.querySelectorAll('.sh-checkbox:checked');
-        const ids = Array.from(checkboxes).map(cb => parseInt(cb.value));
+        const targetTeam = val('sh-team'); const shuffleDate = val('sh-date');
+        const ids = Array.from(shuffleSelectedIds);
 
         if(ids.length === 0) return alert("Selecione pelo menos um membro!");
         if(!targetTeam || targetTeam === "NEW") return alert("Selecione um Time de destino válido.");
@@ -607,43 +704,83 @@
 
         showLoading(true);
         try {
-            // Para cada membro, pega o histórico antigo, insere o novo, e atualiza
             for(let id of ids) {
                 const member = loadedMembers.find(m => m.id === id);
-                let history = [];
-                try { history = JSON.parse(member.Historico_Times || "[]"); } catch(e) {}
-                if(!Array.isArray(history)) history = [];
-                
+                let history = []; try { history = JSON.parse(member.Historico_Times || "[]"); } catch(e) {} if(!Array.isArray(history)) history = [];
                 history.push({ data: shuffleDate, para: targetTeam });
-                
-                await _sb.from('Membros').update({ 
-                    Time: targetTeam, 
-                    Historico_Times: JSON.stringify(history) 
-                }).eq('id', id);
+                await _sb.from('Membros').update({ Time: targetTeam, Historico_Times: JSON.stringify(history) }).eq('id', id);
             }
-            alert("Shuffle executado com sucesso!");
-            closeModal('shuffle-modal');
-            await init();
+            alert("Shuffle executado com sucesso!"); closeModal('shuffle-modal'); await init();
         } catch (e) { alert("Erro ao executar shuffle: " + e.message); }
         showLoading(false);
     }
 
     /* =========================================================
-       SISTEMA DE MULTI-DELETE E TRACK BUILDER (Mantidos iguais)
+       SISTEMA DE MULTI-DELETE INTELIGENTE (GRID VISUAL PARA MEMBROS)
        ========================================================= */
-    function openMultiDelete() { document.getElementById('multi-delete-modal').classList.add('active'); loadMultiDeleteList(); }
-    function loadMultiDeleteList() { const table = val('md-table'); const list = document.getElementById('md-list'); list.innerHTML = ''; let data = []; if(table === 'Noticias') data = loadedNews; else if(table === 'Membros') data = loadedMembers; else if(table === 'Discografia') data = loadedDiscos; else if(table === 'Stages') data = loadedStages; else if(table === 'Banners') data = loadedBanner ? [loadedBanner] : []; if(data.length === 0) { list.innerHTML = '<div style="padding:15px;text-align:center;font-size:0.8rem;color:#999;">Nada encontrado.</div>'; return; } list.innerHTML = data.map(item => `<label class="md-item"><input type="checkbox" value="${item.id}" class="md-checkbox"><span>${item.Titulo || item.Nome || item.titulo}</span></label>`).join(''); }
-    async function executeMultiDelete() { const table = val('md-table'); const checkboxes = document.querySelectorAll('.md-checkbox:checked'); const ids = Array.from(checkboxes).map(cb => parseInt(cb.value)); if(ids.length === 0) return alert("Vazio!"); if(!confirm(`Excluir ${ids.length} itens?`)) return; showLoading(true); try { await _sb.from(table).delete().in('id', ids); closeModal('multi-delete-modal'); await init(); } catch(e) { alert("Erro."); } showLoading(false); }
+    function openMultiDelete() { 
+        const activeSection = document.querySelector('.view-section.active').id;
+        const map = { 'view-home': 'Noticias', 'view-disco': 'Discografia', 'view-members': 'Membros', 'view-stages': 'Stages' };
+        document.getElementById('md-table').value = map[activeSection] || 'Noticias';
+        deleteSelectedIds.clear();
+        document.getElementById("md-filter-team").innerHTML = '<option value="">Todos os Times</option>' + getTeamsOptions().replace('<option value="NEW" style="font-weight:900; color:#e91e63;">+ CRIAR NOVO TIME...</option>', '');
+        loadMultiDeleteList(); document.getElementById('multi-delete-modal').classList.add('active'); 
+    }
 
+    function toggleDeleteMember(id) {
+        if(deleteSelectedIds.has(id)) deleteSelectedIds.delete(id); else deleteSelectedIds.add(id);
+        loadMultiDeleteList();
+    }
+
+    function loadMultiDeleteList() { 
+        const table = val('md-table'); const list = document.getElementById('md-list'); const filters = document.getElementById('md-filters');
+        list.innerHTML = ''; 
+        
+        if(table === 'Membros') {
+            filters.style.display = 'flex';
+            list.className = 'member-grid'; list.style.padding = '10px 5px';
+            const q = document.getElementById("md-search").value.toLowerCase(); const t = document.getElementById("md-filter-team").value;
+            const avail = loadedMembers.filter(m => m.Nome.toLowerCase().includes(q) && (t === '' || m.Time === t));
+            
+            if(avail.length === 0) { list.innerHTML = '<div style="grid-column: 1/-1; text-align:center; color:#999; font-size:0.8rem; padding:10px;">Nada encontrado.</div>'; return; }
+            list.innerHTML = avail.map(m => `
+                <div class="member-card-static ${deleteSelectedIds.has(m.id) ? 'is-selected' : ''}" onclick="toggleDeleteMember(${m.id})">
+                    <img src="${resolveImage(m.Foto)}">
+                    <div class="member-info"><h3>${m.Nome}</h3></div>
+                </div>
+            `).join('');
+        } else {
+            filters.style.display = 'none'; list.className = ''; list.style.padding = '0';
+            let data = []; 
+            if(table === 'Noticias') data = loadedNews; else if(table === 'Discografia') data = loadedDiscos; else if(table === 'Stages') data = loadedStages; else if(table === 'Banners') data = loadedBanner ? [loadedBanner] : []; 
+            if(data.length === 0) { list.innerHTML = '<div style="padding:15px;text-align:center;font-size:0.8rem;color:#999;">Nada encontrado.</div>'; return; } 
+            list.innerHTML = data.map(item => `<label class="md-item"><input type="checkbox" value="${item.id}" class="md-checkbox"><span>${item.Titulo || item.Nome || item.titulo}</span></label>`).join('');
+        }
+    }
+
+    async function executeMultiDelete() { 
+        const table = val('md-table'); let ids = [];
+        if(table === 'Membros') { ids = Array.from(deleteSelectedIds); } 
+        else { const checkboxes = document.querySelectorAll('.md-checkbox:checked'); ids = Array.from(checkboxes).map(cb => parseInt(cb.value)); }
+
+        if(ids.length === 0) return alert("Selecione algum item!"); 
+        if(!confirm(`Excluir ${ids.length} itens permanentemente?`)) return; 
+        
+        showLoading(true); 
+        try { await _sb.from(table).delete().in('id', ids); closeModal('multi-delete-modal'); await init(); } catch(e) { alert("Erro ao deletar."); } 
+        showLoading(false); 
+    }
+
+    /* TRACK BUILDER MOBILE (DISCOS) */
     function renderAdminTracksList() { const list = document.getElementById("admin-tracks-list"); if(adminTracksBuffer.length === 0) { list.innerHTML = "<p style='font-size:0.8rem; color:#999; margin-bottom:10px;'>Nenhuma música cadastrada ainda.</p>"; return; } list.innerHTML = adminTracksBuffer.map((t, i) => `<div class="track-admin-item"><div><b>${t.name}</b> <span style="font-size:0.6rem; background:#eee; padding:2px 4px; border-radius:4px;">${t.kind}</span></div><div><button class="btn-main" style="padding:5px; width:auto; margin:0; display:inline-block;" onclick="openTrackBuilder(${i})"><i class="fas fa-edit"></i></button> <button class="btn-main" style="padding:5px; width:auto; margin:0; display:inline-block; background:#ff4757; border-color:#000;" onclick="deleteTrack(${i})"><i class="fas fa-trash"></i></button></div></div>`).join(''); }
     function deleteTrack(i) { if(confirm("Remover faixa?")) { adminTracksBuffer.splice(i, 1); renderAdminTracksList(); } }
     function openTrackBuilder(index = -1) { editTrackIndex = index; if(index >= 0) { const t = adminTracksBuffer[index]; document.getElementById('tb-name').value = t.name; document.getElementById('tb-kind').value = t.kind; tbSelectedMembers = [...(t.members || [])]; const center = tbSelectedMembers.find(m => m.isCenter); tbCenterId = center ? center.id : null; } else { document.getElementById('tb-name').value = ''; document.getElementById('tb-kind').value = 'A-side'; tbSelectedMembers = []; tbCenterId = null; } document.getElementById('tb-search').value = ''; document.getElementById('admin-track-modal').classList.add('active'); renderTrackBuilder(); }
-    function renderTrackBuilder() { const selGrid = document.getElementById('tb-selected-grid'); if(tbSelectedMembers.length === 0) selGrid.innerHTML = '<div style="color:#999; font-size:0.7rem; width:100%; text-align:center;">Vazio.</div>'; else selGrid.innerHTML = tbSelectedMembers.map(m => `<div class="member-card-static ${m.id == tbCenterId ? 'is-center' : ''}" onclick="setTbCenter(${m.id})"><button class="btn-remove-tb" onclick="event.stopPropagation(); removeTbMember(${m.id})">X</button><img src="${m.Foto || 'https://placehold.co/100'}"><div class="member-info"><h3>${m.Nome}</h3></div></div>`).join(''); const q = document.getElementById('tb-search').value.toLowerCase(); const availGrid = document.getElementById('tb-available-grid'); const avail = loadedMembers.filter(m => !tbSelectedMembers.some(sm => sm.id == m.id) && m.Nome.toLowerCase().includes(q) && m.Status === 'Ativa'); availGrid.innerHTML = avail.map(m => `<div class="member-card-static" onclick='addTbMember(${JSON.stringify(m).replace(/'/g, "&apos;")})'><img src="${m.Foto || 'https://placehold.co/100'}" style="border: 2px dashed #ccc;"><div class="member-info"><h3>${m.Nome}</h3></div></div>`).join(''); }
+    function renderTrackBuilder() { const selGrid = document.getElementById('tb-selected-grid'); if(tbSelectedMembers.length === 0) selGrid.innerHTML = '<div style="color:#999; font-size:0.7rem; width:100%; text-align:center;">Vazio.</div>'; else selGrid.innerHTML = tbSelectedMembers.map(m => `<div class="member-card-static ${m.id == tbCenterId ? 'is-center' : ''}" onclick="setTbCenter(${m.id})"><button class="btn-remove-tb" onclick="event.stopPropagation(); removeTbMember(${m.id})">X</button><img src="${resolveImage(m.Foto)}"><div class="member-info"><h3>${m.Nome}</h3></div></div>`).join(''); const q = document.getElementById('tb-search').value.toLowerCase(); const availGrid = document.getElementById('tb-available-grid'); const avail = loadedMembers.filter(m => !tbSelectedMembers.some(sm => sm.id == m.id) && m.Nome.toLowerCase().includes(q) && m.Status === 'Ativa'); availGrid.innerHTML = avail.map(m => `<div class="member-card-static" onclick='addTbMember(${JSON.stringify(m).replace(/'/g, "&apos;")})'><img src="${resolveImage(m.Foto)}" style="border: 2px dashed #ccc;"><div class="member-info"><h3>${m.Nome}</h3></div></div>`).join(''); }
     function addTbMember(m) { tbSelectedMembers.push({ id: m.id, name: m.Nome, Foto: m.Foto, gen: m.Geracao, isCenter: false }); if(tbSelectedMembers.length === 1) tbCenterId = m.id; renderTrackBuilder(); }
     function removeTbMember(id) { tbSelectedMembers = tbSelectedMembers.filter(m => m.id != id); if(tbCenterId == id) { tbCenterId = tbSelectedMembers.length > 0 ? tbSelectedMembers[0].id : null; } renderTrackBuilder(); }
     function setTbCenter(id) { tbCenterId = id; renderTrackBuilder(); }
     function saveTrackToBuffer() { const name = document.getElementById('tb-name').value.trim(); if(!name || tbSelectedMembers.length === 0) return alert("Preencha tudo!"); const finalMembers = tbSelectedMembers.map(m => ({ ...m, isCenter: m.id == tbCenterId })); const trackData = { name: name, kind: document.getElementById('tb-kind').value, members: finalMembers }; if(editTrackIndex >= 0) adminTracksBuffer[editTrackIndex] = trackData; else adminTracksBuffer.push(trackData); renderAdminTracksList(); closeModal('admin-track-modal'); }
-    function buildDiscoHTML() { let h=`<div class="modal-nav"><button class="modal-nav-btn active">Tracklist</button></div><div class="details-content"><ol class="tracklist">`; let f=`<div class="modal-section">`; adminTracksBuffer.forEach(t=>{ h+=`<li><a>${t.name}</a> <span class="label ${t.kind.toLowerCase()}">${t.kind}</span></li>`; f+=`<div class="formation-group"><div class="formation-title">${t.name}</div><div class="member-grid">` + (t.members||[]).map(m=>`<a class="member-card-static ${m.isCenter?'is-center':''}"><img src="${m.Foto||'https://placehold.co/100'}"><div class="member-info"><h3>${m.name}</h3></div></a>`).join('') + `</div></div><hr>`; }); return h+`</ol></div>`+f+`</div><div id="ctl48-formation-data" style="display:none;">${JSON.stringify(adminTracksBuffer)}</div>`; }
+    function buildDiscoHTML() { let h=`<div class="modal-nav"><button class="modal-nav-btn active">Tracklist</button></div><div class="details-content"><ol class="tracklist">`; let f=`<div class="modal-section">`; adminTracksBuffer.forEach(t=>{ h+=`<li><a>${t.name}</a> <span class="label ${t.kind.toLowerCase()}">${t.kind}</span></li>`; f+=`<div class="formation-group"><div class="formation-title">${t.name}</div><div class="member-grid">` + (t.members||[]).map(m=>`<a class="member-card-static ${m.isCenter?'is-center':''}"><img src="${resolveImage(m.Foto)}"><div class="member-info"><h3>${m.name}</h3></div></a>`).join('') + `</div></div><hr>`; }); return h+`</ol></div>`+f+`</div><div id="ctl48-formation-data" style="display:none;">${JSON.stringify(adminTracksBuffer)}</div>`; }
 
     init();
   </script>
